@@ -68,16 +68,15 @@
         break;
       }
     };
-    // console.log(element);
+    
     const parentDiv = element.parentNode;
     const keyNum = parentDiv.getAttribute("data-key");
 
     parentDiv.classList.add("playing");
     
-    // console.log(keyNum);
     const audio = document.querySelector(`audio[data-key="${keyNum}"]`);
     if (!audio) return; // stops function if no audio
-
+    audio.currentTime = 0; // rewinds sound to start
     audio.play();
   })
 
