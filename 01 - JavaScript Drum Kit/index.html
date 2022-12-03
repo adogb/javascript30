@@ -58,7 +58,25 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  // KeyboardEvent.keyCode is deprecated so I need a workaround to use data-key
+  window.addEventListener("keydown", function(e) {
+    const keyPress = e.key;
+    let element = "";
+    for (const tag of document.querySelectorAll("kbd")){
+      if (tag.innerText === keyPress.toUpperCase()){
+        element = tag;
+        break;
+      }
+    };
+    // console.log(element);
+    const keyNum = element.parentNode.getAttribute("data-key");
+    // console.log(keyNum);
+    const audio = document.querySelector(`audio[data-key="${keyNum}"]`);
+    if (!audio) return; // stops function if no audio
 
+    audio.play();
+  })
+  
 </script>
 
 
